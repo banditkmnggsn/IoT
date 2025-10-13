@@ -1,1 +1,22 @@
-https://drive.google.com/drive/folders/1i8dJ-TZloxaJKLjozHR-f0KKVySp7ANP?usp=sharing
+#include <WiFi.h>
+
+#define WIFI_SSID "M6"
+#define WIFI_PASS "STep1234"
+
+void setup() {
+  Serial.begin(115200);
+  delay(200);
+
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
+
+  Serial.print("Connected. IP: ");
+  Serial.println(WiFi.localIP());
+}
+
+void loop() {
+}
