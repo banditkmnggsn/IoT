@@ -1,1 +1,51 @@
-tes
+#include <Arduino.h>
+#include <WiFi.h>
+#include <ArduinoOTA.h>
+
+const char* ssid = "M6";
+const char* password = "STep1234";
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Booting...");
+
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
+    Serial.println("Gagal konek, restart...");
+    delay(5000);
+    ESP.restart();
+  }
+
+  ArduinoOTA.setHostname("ESP32-nano"); 
+  ArduinoOTA.setPassword("bandit123");
+
+  ArduinoOTA.onStart([]() {
+    Serial.println("Memulai OTA update...");
+  });
+  ArduinoOTA.onEnd([]() {
+    Serial.println("\nSelesai OTA update!");
+  });
+  ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
+    Serial.printf("Progres: %u%%\r", (progress / (total / 100)));
+  });
+  ArduinoOTA.onError([](ota_error_t error) {
+    Serial.printf("Error[%u]: ", error);
+  });
+
+  ArduinoOTA.begin();
+  Serial.println("Siap OTA!");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+void loop() {
+  ArduinoOTA.handle();
+  for(int x =0; x<100; x++){
+  digitalWrite(45,LOW);
+  delay (300);
+  digitalWrite(45,HIGH);
+  delay (100);
+  }
+}
