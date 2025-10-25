@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "202596605948",
+    "firebase_url": "https://iot-percobaan-8b546-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "iot-percobaan-8b546",
+    "storage_bucket": "iot-percobaan-8b546.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202596605948:android:b825c5af11c6764bae5c79",
+        "android_client_info": {
+          "package_name": "com.example.iot_micon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg59PnxxK5wFgFVBcdKQ-aD2jOndq4d44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

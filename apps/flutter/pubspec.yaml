@@ -1,0 +1,23 @@
+name: iot_micon
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'  # More flexible SDK constraint
+
+dependencies:
+  flutter:
+    sdk: flutter
+  percent_indicator: ^4.2.3
+  firebase_core: ^2.15.1  
+  firebase_database: ^10.2.5
+  cloud_firestore: ^4.8.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
