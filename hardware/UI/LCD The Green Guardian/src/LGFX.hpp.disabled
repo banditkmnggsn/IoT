@@ -1,0 +1,12 @@
+// #pragma once
+// #include <LovyanGFX.hpp>
+
+// class LGFX : public lgfx::LGFX_Device
+// {
+// public:
+//     LGFX();
+
+// private:
+//     lgfx::Bus_Panel _bus_instance;
+//     lgfx::Panel_RGB _panel_instance;
+// };

@@ -1,0 +1,78 @@
+// #include "LGFX.hpp"
+
+// LGFX::LGFX()
+// {
+//     // ========= BUS CONFIG (RGB 16-bit) =========
+//     {
+//         auto cfg = _bus_instance.config();
+
+//         cfg.panel_width  = 480;
+//         cfg.panel_height = 272;
+
+//         // ====== PIN RGB sesuai file Anda ======
+//         cfg.pin_d0  = 4;
+//         cfg.pin_d1  = 5;
+//         cfg.pin_d2  = 6;
+//         cfg.pin_d3  = 7;
+//         cfg.pin_d4  = 15;
+//         cfg.pin_d5  = 16;
+//         cfg.pin_d6  = 17;
+//         cfg.pin_d7  = 18;
+
+//         cfg.pin_d8  = 8;
+//         cfg.pin_d9  = 3;
+//         cfg.pin_d10 = 46;
+//         cfg.pin_d11 = 9;
+//         cfg.pin_d12 = 1;
+//         cfg.pin_d13 = 2;
+//         cfg.pin_d14 = 42;
+//         cfg.pin_d15 = 41;
+
+//         // ===== SYNC SIGNALS =====
+//         cfg.pin_henable = 40;  // DE
+//         cfg.pin_vsync   = 39;
+//         cfg.pin_hsync   = 38;
+//         cfg.pin_pclk    = 45;
+
+//         // PCLK (rekomendasi datasheet)
+//         cfg.freq_write = 15000000;
+
+//         _bus_instance.config(cfg);
+//     }
+
+//     // ========= PANEL CONFIG =========
+//     {
+//         auto cfg = _panel_instance.config();
+
+//         cfg.memory_width  = 480;
+//         cfg.memory_height = 272;
+
+//         cfg.panel_width   = 480;
+//         cfg.panel_height  = 272;
+
+//         cfg.offset_x = 0;
+//         cfg.offset_y = 0;
+
+//         cfg.offset_rotation = 0;   // landscape
+
+//         // ===== RGB Timing dari file Anda =====
+//         cfg.hsync_polarity    = 1;
+//         cfg.hsync_front_porch = 8;
+//         cfg.hsync_pulse_width = 4;
+//         cfg.hsync_back_porch  = 43;
+
+//         cfg.vsync_polarity    = 1;
+//         cfg.vsync_front_porch = 4;
+//         cfg.vsync_pulse_width = 2;
+//         cfg.vsync_back_porch  = 12;
+
+//         cfg.pclk_active_neg = 1;
+//         cfg.pclk_idle_high  = 0;
+
+//         _panel_instance.config(cfg);
+//     }
+
+//     // FINALLY ATTACH
+//     _panel_instance.setBus(&_bus_instance);
+//     setPanel(&_panel_instance);
+// }
