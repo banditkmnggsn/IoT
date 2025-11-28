@@ -1,0 +1,3 @@
+spec link:
+https://esp3d.io/ESP3D-TFT/Version_1.X/hardware/esp32-s3/sunton-43-8048/
+https://forum.lvgl.io/uploads/short-url/6ENmpXDatkoQVhSF2LzZdWkp76o.pdf
