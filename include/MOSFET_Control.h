@@ -20,14 +20,13 @@ inline void initMOSFET() {
   digitalWrite(MOSFET_PIN_Z4, LOW);
 
   pinMode(V5_ENABLE_PIN, OUTPUT);
-  digitalWrite(V5_ENABLE_PIN, HIGH);  // enable 5V rail if required
+  digitalWrite(V5_ENABLE_PIN, HIGH);
 
   mosfetData.state[1] = false;
 }
 
 inline void setMOSFET(uint8_t zone, bool on) {
-  if (zone == 1) {  // using slot 1 for single zone (Z4)
-    digitalWrite(MOSFET_PIN_Z4, on ? HIGH : LOW);
+  if (zone == 1) { 
     mosfetData.state[1] = on;
   }
 }

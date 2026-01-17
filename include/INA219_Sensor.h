@@ -13,7 +13,6 @@ struct INA219Data {
   float shuntVoltageV;
   float currentmA;
   float power_mW;
-  // Aliases used in main.cpp
   float voltage;
   float current;
   float power;
@@ -42,7 +41,6 @@ void readINA219() {
   ina219Data.busVoltageV = ina219Sensor.getBusVoltage_V();
   ina219Data.currentmA = ina219Sensor.getCurrent_mA();
   ina219Data.power_mW = ina219Sensor.getPower_mW();
-  // Aliases for compatibility
   ina219Data.voltage = ina219Data.busVoltageV;
   ina219Data.current = ina219Data.currentmA;
   ina219Data.power = ina219Data.power_mW;

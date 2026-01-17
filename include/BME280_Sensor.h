@@ -97,8 +97,6 @@ void initBME280(TwoWire *wire = &Wire) {
     }
   }
 }
-// ==================== INISIALISASI BME280 DENGAN TIMEOUT ====================
-// Extended debug initialization (disabled). Use the simple initBME280() above.
 
 // ==================== BACA DATA BME280 ====================
 void readBME280() {

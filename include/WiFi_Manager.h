@@ -30,7 +30,7 @@ inline void connectWiFi() {
   Serial.printf("SSID: %s\n", WIFI_CONFIG.ssid);
 
   int retry = 0;
-  const int maxRetry = 30;  // ~15 detik (500ms tiap loop)
+  const int maxRetry = 30;
   while (WiFi.status() != WL_CONNECTED && retry < maxRetry) {
     delay(500);
     Serial.print(".");

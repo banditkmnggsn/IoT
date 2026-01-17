@@ -17,19 +17,17 @@ BH1750 bh1750Sensor;
 BH1750Data bh1750Data = {0, false};
 
 void initBH1750(TwoWire *wire = &Wire) {
-  Serial.println("\n[DEBUG] ┌─── BH1750 SENSOR INITIALIZATION ─────────┐");
   bh1750Data.isValid = false;
 
   if (bh1750Sensor.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, wire)) {
     bh1750Data.isValid = true;
-    Serial.println("[DEBUG] │ ✓ BH1750 DETECTED at 0x23");
+    Serial.println("BH1750 DETECTED at 0x23");
   } else if (bh1750Sensor.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x5C, wire)) {
     bh1750Data.isValid = true;
-    Serial.println("[DEBUG] │ ✓ BH1750 DETECTED at 0x5C");
+    Serial.println("BH1750 DETECTED at 0x5C");
   } else {
-    Serial.println("[ERROR] │ ✗ BH1750 NOT FOUND (0x23/0x5C)");
+    Serial.println("BH1750 NOT FOUND (0x23/0x5C)");
   }
-  Serial.println("[DEBUG] └──────────────────────────────────────────┘");
 }
 
 void readBH1750() {
@@ -39,10 +37,10 @@ void readBH1750() {
 
 void printBH1750Data() {
   if (!bh1750Data.isValid) {
-    Serial.println("│ ❌ BH1750: Sensor not ready");
+    Serial.println("BH1750: Sensor not ready");
     return;
   }
-  Serial.printf("│ 💡 Light      : %.2f lux\n", bh1750Data.lightLevel);
+  Serial.printf("Light: %.2f lux\n", bh1750Data.lightLevel);
 }
 
 #endif

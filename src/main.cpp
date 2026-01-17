@@ -32,66 +32,65 @@ void setup() {
   Serial.begin(115200);
   delay(1000);
   
-  Serial.println("GREEN GUARDIAN - IOT SYSTEM ");
+  Serial.println("GREEN GUARDIAN - IOT SYSTEM");
 
   
   // ===== INISIALISASI I2C =====
-  Serial.println("\n[DEBUG] Initializing I2C...");
-  Wire.begin(I2C_SDA, I2C_SCL);  
-  Serial.println("[DEBUG] ✓ I2C Clock initialized");
-  Serial.printf("[DEBUG] SDA=D2 (GPIO%d), SCL=D1 (GPIO%d)\n", I2C_SDA, I2C_SCL);
+  Serial.println("\nInitializing I2C...");
+  Wire.begin(I2C_SDA, I2C_SCL);
+  Serial.println("I2C clock initialized");
+  Serial.printf("SDA=D2 (GPIO%d), SCL=D1 (GPIO%d)\n", I2C_SDA, I2C_SCL);
   delay(1000);
   
   // ===== I2C SCAN =====
-  Serial.println("\n[DEBUG] ===== I2C DEVICE SCAN =====");
+  Serial.println("\nI2C device scan");
   int deviceCount = 0;
   for(byte addr = 1; addr < 127; addr++) {
     Wire.beginTransmission(addr);
     byte error = Wire.endTransmission();
     if(error == 0) {
-      Serial.printf("[DEBUG] ✓ Device found at 0x%02X\n", addr);
+      Serial.printf("Device found at 0x%02X\n", addr);
       deviceCount++;
     }
   }
-  Serial.printf("[DEBUG] Total devices found: %d\n", deviceCount);
+  Serial.printf("Total devices found: %d\n", deviceCount);
   if(deviceCount == 0) {
-    Serial.println("[ERROR] NO I2C DEVICES DETECTED!");
-
+    Serial.println("No I2C devices detected!");
   }
   delay(1000);
   
   // ===== INISIALISASI SEMUA SENSOR =====
-  Serial.println("\n[DEBUG] ===== SENSOR INITIALIZATION =====");
+  Serial.println("\nSensor initialization");
   
-  Serial.println("[DEBUG] 1. Initializing BME280...");
+  Serial.println("1. Initializing BME280...");
   initBME280(&Wire);
   delay(500);
   
-  Serial.println("[DEBUG] 2. Initializing BH1750...");
+  Serial.println("2. Initializing BH1750...");
   initBH1750(&Wire);
   delay(500);
   
-  Serial.println("[DEBUG] 3. Initializing INA219...");
+  Serial.println("3. Initializing INA219...");
   initINA219(&Wire);
   delay(500);
   
-  Serial.println("[DEBUG] 4. Initializing Rain Sensor...");
+  Serial.println("4. Initializing Rain Sensor...");
   initRainSensor();
   delay(500);
   
-  Serial.println("[DEBUG] 5. Initializing MOSFET & GPIO...");
+  Serial.println("5. Initializing MOSFET & GPIO...");
   initMOSFET();
   delay(500);
   
-  Serial.println("[DEBUG] ✓ All sensors initialized!");
+  Serial.println("All sensors initialized!");
   delay(1000);
   
   // ===== INISIALISASI WIFI & FIREBASE =====
-  Serial.println("[DEBUG] 6. Initializing WiFi Manager...");
+  Serial.println("6. Initializing WiFi Manager...");
   initWiFiManager();
   delay(500);
   
-  Serial.println("[DEBUG] 7. Initializing Firebase...");
+  Serial.println("7. Initializing Firebase...");
   initFirebase();
   delay(500);
   
@@ -123,13 +122,13 @@ void loop() {
     if (!pumpCurrentlyOn && currentTemp >= TEMP_THRESHOLD_HIGH) {
       // Suhu tinggi & pompa mati → Nyalakan pompa
       setMOSFET(1, true);
-      Serial.println("\n🌡️  [AUTO] Temperature HIGH! Pump ON");
+      Serial.println("\nemperature HIGH! Pump ON");
       Serial.printf("    Temp: %.2f°C >= %.1f°C\n", currentTemp, TEMP_THRESHOLD_HIGH);
     } 
     else if (pumpCurrentlyOn && currentTemp <= TEMP_THRESHOLD_LOW) {
       // Suhu turun & pompa nyala → Matikan pompa
       setMOSFET(1, false);
-      Serial.println("\n🌡️  [AUTO] Temperature normalized. Pump OFF");
+      Serial.println("\nTemperature normalized. Pump OFF");
       Serial.printf("    Temp: %.2f°C <= %.1f°C\n", currentTemp, TEMP_THRESHOLD_LOW);
     }
   }
@@ -143,28 +142,23 @@ void loop() {
   printRainSensorData();
   printINA219Data();
   
-  Serial.println("\n┌─── MOSFET STATUS ───────────────────────────┐");
+  Serial.println("\nMOSFET STATUS");
   printMOSFETStatus();
-  Serial.println("│");
-  Serial.printf("│ 🤖 Auto Control : %s\n", autoControlEnabled ? "ENABLED ✓" : "DISABLED");
+  Serial.printf("Auto Control : %s\n", autoControlEnabled ? "ENABLED" : "DISABLED");
   if (autoControlEnabled && bme280Data.isValid) {
-    Serial.printf("│ 🌡️  Threshold   : HIGH=%.1f°C, LOW=%.1f°C\n", 
+    Serial.printf("Threshold   : HIGH=%.1f°C, LOW=%.1f°C\n", 
       TEMP_THRESHOLD_HIGH, TEMP_THRESHOLD_LOW);
-    Serial.printf("│ 📊 Current Temp : %.2f°C\n", bme280Data.temperature);
+    Serial.printf("Current Temp : %.2f°C\n", bme280Data.temperature);
   }
-  Serial.println("└─────────────────────────────────────────────┘");
-  
-  Serial.println("\n┌─── WIFI STATUS ─────────────────────────────┐");
+  Serial.println("\nWIFI STATUS");
   printWiFiStatus();
-  Serial.println("└─────────────────────────────────────────────┘");
-  
-  Serial.println("\n┌─── FIREBASE STATUS ─────────────────────────┐");
+
+  Serial.println("\nFIREBASE STATUS");
   printFirebaseStatus();
-  Serial.println("└─────────────────────────────────────────────┘");
   
   // ===== UPDATE FIREBASE SETIAP INTERVAL =====
   if (isWiFiConnected() && millis() - lastFirebaseUpdate >= FIREBASE_UPDATE_INTERVAL) {
-    Serial.println("\n📤 Sending data to Firebase...");
+    Serial.println("\nSending data to Firebase...");
     
     // Build JSON string manually
     String jsonData = "{";
@@ -173,14 +167,10 @@ void loop() {
     jsonData += "\"pressure\":" + String(bme280Data.pressure, 2) + ",";
     jsonData += "\"lightLevel\":" + String(bh1750Data.lightLevel, 2) + ",";
     jsonData += "\"voltage\":" + String(ina219Data.voltage, 2) + ",";
-    jsonData += "\"current\":" + String(ina219Data.current, 2) + ",";
-    jsonData += "\"power\":" + String(ina219Data.power, 2) + ",";
     
     // Add rain sensor data
     jsonData += "\"isRaining\":" + (rainSensorData.isRaining ? String("true") : String("false")) + ",";
-    jsonData += "\"rainDuration\":" + String(rainSensorData.isRaining ? (millis() - rainSensorData.lastChangeTime) : rainSensorData.rainDuration) + ",";
-    jsonData += "\"dryDuration\":" + String(!rainSensorData.isRaining ? (millis() - rainSensorData.lastChangeTime) : rainSensorData.dryDuration) + ",";
-    
+   
     // Add MOSFET status (single zone only for ESP8266)
     jsonData += "\"mosfet\":{";
     jsonData += "\"zone_4\":" + (mosfetData.state[1] ? String("true") : String("false"));  // Z4 only
@@ -199,5 +189,5 @@ void loop() {
     lastFirebaseUpdate = millis();
   }
   
-  delay(2000);  // Baca setiap 2 detik
+  delay(2000);
 }
