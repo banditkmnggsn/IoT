@@ -9,18 +9,12 @@
 #include <Wire.h>
 
 struct INA219Data {
-  float busVoltageV;
-  float shuntVoltageV;
-  float currentmA;
-  float power_mW;
   float voltage;
-  float current;
-  float power;
   bool isValid;
 };
 
 Adafruit_INA219 ina219Sensor;
-INA219Data ina219Data = {0, 0, 0, 0, 0, 0, 0, false};
+INA219Data ina219Data = {0.0f, false};
 
 void initINA219(TwoWire *wire = &Wire) {
   Serial.println("INA219 sensor initialization");
@@ -37,13 +31,8 @@ void initINA219(TwoWire *wire = &Wire) {
 
 void readINA219() {
   if (!ina219Data.isValid) return;
-  ina219Data.shuntVoltageV = ina219Sensor.getShuntVoltage_mV() / 1000.0f;
-  ina219Data.busVoltageV = ina219Sensor.getBusVoltage_V();
-  ina219Data.currentmA = ina219Sensor.getCurrent_mA();
-  ina219Data.power_mW = ina219Sensor.getPower_mW();
-  ina219Data.voltage = ina219Data.busVoltageV;
-  ina219Data.current = ina219Data.currentmA;
-  ina219Data.power = ina219Data.power_mW;
+  // Read only bus voltage
+  ina219Data.voltage = ina219Sensor.getBusVoltage_V();
 }
 
 void printINA219Data() {
@@ -51,10 +40,7 @@ void printINA219Data() {
     Serial.println("INA219: Sensor not ready");
     return;
   }
-  Serial.printf("Bus Volt   : %.3f V\n", ina219Data.busVoltageV);
-  Serial.printf("Shunt Volt : %.3f V\n", ina219Data.shuntVoltageV);
-  Serial.printf("Current    : %.2f mA\n", ina219Data.currentmA);
-  Serial.printf("Power      : %.2f mW\n", ina219Data.power_mW);
+  Serial.printf("Bus Volt   : %.3f V\n", ina219Data.voltage);
 }
 
 #endif
