@@ -40,7 +40,7 @@ void printINA219Data() {
     Serial.println("INA219: Sensor not ready");
     return;
   }
-  Serial.printf("Bus Volt   : %.3f V\n", ina219Data.voltage);
+  Serial.printf("Volt: %.3f V\n", ina219Data.voltage);
 }
 
 #endif

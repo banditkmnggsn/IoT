@@ -18,8 +18,7 @@ struct WiFiStatusInfo {
   long rssi;
 };
 
-// TODO: sesuaikan SSID/PASSWORD di sini
-const WiFiConfig WIFI_CONFIG = {"YOUR_SSID", "YOUR_PASSWORD"};
+const WiFiConfig WIFI_CONFIG = {"The Green Guardian", "12345678"};
 WiFiStatusInfo wifiStatus = {false, "0.0.0.0", 0};
 
 inline void connectWiFi() {

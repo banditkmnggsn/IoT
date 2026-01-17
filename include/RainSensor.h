@@ -15,11 +15,6 @@ struct RainSensorData {
 
 RainSensorData rainSensorData = {false};
 
-inline void initRainSensor() {
-  pinMode(RAIN_PIN, INPUT);
-  rainSensorData.isRaining = (digitalRead(RAIN_PIN) == LOW);
-}
-
 inline void readRainSensor() {
   rainSensorData.isRaining = (digitalRead(RAIN_PIN) == LOW);
 }

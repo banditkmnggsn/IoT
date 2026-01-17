@@ -74,8 +74,8 @@ void setup() {
   initINA219(&Wire);
   delay(500);
   
-  Serial.println("4. Initializing Rain Sensor...");
-  initRainSensor();
+  Serial.println("4. Configuring Rain Sensor pin...");
+  pinMode(RAIN_PIN, INPUT);
   delay(500);
   
   Serial.println("5. Initializing MOSFET & GPIO...");
