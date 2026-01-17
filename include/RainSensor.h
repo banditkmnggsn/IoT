@@ -13,11 +13,9 @@ struct RainSensorData {
   int raw;
   bool isRaining;
   unsigned long lastChangeTime;
-  unsigned long rainDuration;
-  unsigned long dryDuration;
 };
 
-RainSensorData rainSensorData = {HIGH, false, 0, 0, 0};
+RainSensorData rainSensorData = {HIGH, false, 0};
 
 inline void initRainSensor() {
   pinMode(RAIN_PIN, INPUT);
@@ -32,11 +30,6 @@ inline void readRainSensor() {
 
   if (newState != rainSensorData.isRaining) {
     unsigned long now = millis();
-    if (rainSensorData.isRaining) {
-      rainSensorData.rainDuration += (now - rainSensorData.lastChangeTime);
-    } else {
-      rainSensorData.dryDuration += (now - rainSensorData.lastChangeTime);
-    }
     rainSensorData.lastChangeTime = now;
     rainSensorData.isRaining = newState;
   }

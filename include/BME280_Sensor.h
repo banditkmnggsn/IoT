@@ -60,7 +60,7 @@ uint8_t readBME280Register(TwoWire *wire, uint8_t address, uint8_t reg) {
   uint8_t error = wire->endTransmission(false);
   
   if (error != 0) {
-    return 0xFF; // Error
+    return 0xFF;
   }
   
   wire->requestFrom(address, (uint8_t)1);
@@ -93,7 +93,6 @@ void initBME280(TwoWire *wire = &Wire) {
     else {
       Serial.println("BME280 not found at either address");
       Serial.println("Check: GND connection, VCC power, I2C wiring");
-      bme280Data.isValid = false;
     }
   }
 }

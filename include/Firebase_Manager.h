@@ -26,7 +26,7 @@ FirebaseSendResult firebaseResult = {false, 0, ""};
 
 // TODO: sesuaikan host/path/auth sesuai project
 FirebaseConfig firebaseConfig = {
-  "your-project-id.firebaseio.com",
+  "https://plant-watering-system-54df2-default-rtdb.asia-southeast1.firebasedatabase.app",
   "/esp8266",
   ""
 };
